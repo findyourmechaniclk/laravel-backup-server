@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "run-tests.yml"
+# Estimated savings: ~2 min/run
+#
 name: run-tests
 
 on:
@@ -15,6 +20,10 @@ on:
       - 'package.json'
       - 'yarn.lock'
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 
